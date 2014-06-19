@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\n\ndata<-read.csv(\"report_2014-06-19.csv\",sep=\"\\t\")\ndata$Date<-as.Date(data$Date, \"%Y-%m-%d\") \n\n\n\nshinyUI(pageWithSidebar(\n\n\theaderPanel(\"Hello Shiny!\"),\n\n\tsidebarPanel(\n\t\tselectInput(\"begin1\", \"Begin date:\", choices=unique(data$Date),selected=\"2013-06-01\"),\n\t\tselectInput(\"end2\", \"End date:\", choices=unique(data$Date))),\n\n\tmainPanel(\n\t\tverbatimTextOutput(\"plot\")\n\t)\n))",
+    "created" : 1403209591672.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "3024263043",
+    "id" : "B1CDB848",
+    "lastKnownWriteTime" : 1403209814,
+    "path" : "~/Novateca/Novateca/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
