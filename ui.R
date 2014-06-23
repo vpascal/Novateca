@@ -7,13 +7,13 @@ data$Date<-as.Date(data$Date, "%Y-%m-%d")
 
 shinyUI(pageWithSidebar(
 
-	headerPanel("Hello Shiny!"),
+	headerPanel("Novateca  Datat App"),
 
 	sidebarPanel(
 		selectInput("begin1", "Begin date:", choices=unique(data$Date),selected="2013-06-01"),
-		selectInput("end2", "End date:", choices=unique(data$Date))),
+		selectInput("end2", "End date:", choices=unique(data$Date),selected="2014-02-01")),
 
 	mainPanel(
-		verbatimTextOutput("plot")
+		plotOutput("plot")
 	)
 ))
