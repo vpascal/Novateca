@@ -1,0 +1,43 @@
+library(ggplot2)
+library(animation)
+
+# to produce video, flash, GIF or pdf, install respective software e.g. FFmpeg, SWF Tools, or Latex; pls. refer to ?animation
+# you may need to run commands below only once i.e. the first time you install FFmpeg, SWF Tools, etc. 
+
+# ani.options(swftools = 'C:/Program Files (x86)/SWFTools')
+# ani.options(ffmpeg = "C:/ffmpeg/bin/ffmpeg.exe")
+# if (.Platform$OS.type != "windows") ani.options(ffmpeg = "ffmpeg")
+
+load("C:/Users/Vladislav Pascal/Documents/a.RData")
+
+
+# let's generate a flash animation
+
+saveSWF({
+for(i in seq(from=1,to=44,by=1)){
+print(ggplot(area,aes(long, lat))+geom_polygon(aes(group=group,fill=Value),colour="white")+
+geom_point(data=subset(a,id<1+i),aes(coords.x1,coords.x2))+coord_map()+
+theme(panel.border=element_blank(),panel.grid.major=element_blank(),panel.background=element_blank(),axis.title=element_blank(),axis.text=element_blank(),axis.ticks=element_blank()))
+}},interval = 0.2, movie.name = "map.swf", ani.width = 600, ani.height =600)
+
+# generating video
+saveVideo({
+  for(i in seq(from=1,to=1534,by=25)){
+    print(ggplot(area,aes(long, lat))+geom_polygon(aes(group=group),colour="white",fill="#00A6FF")+
+            geom_point(data=subset(a,id<1+i),aes(coords.x1,coords.x2),colour="black", size=2.6)+
+            geom_polygon(data =transn, aes(long, lat,group=group),colour="white", fill="grey")+coord_map()+
+            theme(panel.border=element_blank(),panel.grid.major=element_blank(),panel.background=element_blank(),axis.title=element_blank(),axis.text=element_blank(),axis.ticks=element_blank()))
+  }}, video.name = "map.avi", interval = 0.2, ani.width = 1920, ani.height = 1080, other.opts = "-b 4000k")
+
+
+############################################
+
+ggplot(area,aes(long, lat))+geom_polygon(aes(group=group),colour="white", fill="#00A6FF")+
+  geom_point(data=a,aes(coords.x1,coords.x2),colour="black", size=1)+
+  geom_polygon(data =transn, aes(long, lat,group=group),colour="white", fill="grey")+coord_map()+
+  theme(panel.border=element_blank(),panel.grid.major=element_blank(),panel.background=element_blank(),axis.title=element_blank(),axis.text=element_blank(),axis.ticks=element_blank())
+  
+
+
+
+
